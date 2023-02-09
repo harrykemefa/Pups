@@ -15,12 +15,10 @@
             <div class="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
     <div class="relative mt-1 rounded-md shadow-sm">
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-</svg>
+        <CreditCardIcon class="h-6 w-6 text-blue-500"/>
 
       </div>
-      <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 pl-10 py-2  sm:text-sm" placeholder="German Sherpherds" />
+      <input type="text"  class="block w-full rounded-md border-gray-300 pl-10 py-2  sm:text-sm" placeholder="German Sherpherds" />
     </div>
          
             </div>
@@ -34,6 +32,7 @@
   </template>
   
   <script setup>
+import { CreditCardIcon } from '@heroicons/vue/outline'
   
   const profile = {
     name: 'PUPS+',
