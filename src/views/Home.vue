@@ -17,6 +17,7 @@ import { onMounted, reactive, computed } from 'vue'
 import { useStore } from 'vuex';
 const store = useStore();
 
+
 const state = reactive({
   pups: computed(() => store.state.all),
 });
