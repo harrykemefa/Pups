@@ -1,8 +1,9 @@
 <script setup>
+
 </script>
 
 <template>
   <main>
-   <h1>PUPS+</h1>
+   <h1 class="text-red-600">PUPS+</h1>
   </main>
 </template>
