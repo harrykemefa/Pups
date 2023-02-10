@@ -6,6 +6,7 @@ const store = createStore({
   state () {
     return {
       all: localStorage.getItem('dogs') ? JSON.parse(localStorage.getItem('dogs')) : [],
+      breeds: localStorage.getItem('breeds') ? JSON.parse(localStorage.getItem('breeds')) : [],
       loading: false,
     }
   },
@@ -14,6 +15,11 @@ const store = createStore({
       state.all = pups;
       localStorage.setItem('dogs', JSON.stringify(state.all));
     },
+
+    SET_BREEDS(state, breeds) {
+        state.breeds = breeds
+        localStorage.setItem('breeds', JSON.stringify(state.breeds))
+      },
 
     SET_LOADING(state, status) {
         state.loading = status
@@ -30,7 +36,14 @@ const store = createStore({
 
         commit('SET_PUPS', images)
         commit('SET_LOADING', false)
-    }
+    },
+
+    async fetchBreeds({commit}) {
+        const res = await api.get(`breeds/list`);
+        if(res.data.status == "success"){
+          commit('SET_BREEDS', res.data.message)
+        }
+      },
   },
 });
 

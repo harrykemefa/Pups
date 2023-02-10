@@ -18,7 +18,9 @@
         <CreditCardIcon class="h-6 w-6 text-blue-500"/>
 
       </div>
-      <input type="text"  class="block w-full rounded-md border-gray-300 pl-10 py-2  sm:text-sm" placeholder="German Sherpherds" />
+      <div>
+ <slot name="select"></slot>
+  </div>
     </div>
          
             </div>
@@ -34,6 +36,7 @@
   <script setup>
 import VLazyImage from "v-lazy-image";
 import { CreditCardIcon } from '@heroicons/vue/outline'
+
   
   const profile = {
     name: 'PUPS+',
