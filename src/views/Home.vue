@@ -2,8 +2,8 @@
   <main>
    <AHeader>
     <template #select>
-      <select id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-      <option selected>All Dogs</option>
+      <select v-model="state.selectedBreed" @change="handleBreedSelection" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+      <option value="all">All Dogs</option>
       <option v-for="breed in state.breeds" :key="breed" :value="breed">{{ breed }}</option>
     </select>
     </template>
@@ -28,10 +28,21 @@ const store = useStore();
 
 
 const state = reactive({
-  pups: computed(() => store.state.all),
+  pups: store.state.all,
   breeds: computed(() => store.state.breeds),
   isLoading: computed(() => store.state.loading),
+  selectedBreed: 'all'
 });
+
+
+const handleBreedSelection = async (breed) => {
+  if (state.selectedBreed !== 'all') {
+      await store.dispatch('fetchBreedDogs', state.selectedBreed);
+      state.pups = store.state.selectedBreed;
+      } else {
+        state.pups = store.state.all
+      }
+}
 
 onMounted(async () => {
   await store.dispatch('fetchPups');

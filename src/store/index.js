@@ -7,6 +7,7 @@ const store = createStore({
     return {
       all: localStorage.getItem('dogs') ? JSON.parse(localStorage.getItem('dogs')) : [],
       breeds: localStorage.getItem('breeds') ? JSON.parse(localStorage.getItem('breeds')) : [],
+      selectedBreed: null,
       loading: false,
     }
   },
@@ -21,9 +22,14 @@ const store = createStore({
         localStorage.setItem('breeds', JSON.stringify(state.breeds))
       },
 
+    SET_SELECTED_BREED(state, breed) {
+        state.selectedBreed = breed
+      },
+
     SET_LOADING(state, status) {
         state.loading = status
-    }
+    },
+
   },
   actions: {
     async fetchPups({commit}) {
@@ -44,6 +50,18 @@ const store = createStore({
           commit('SET_BREEDS', res.data.message)
         }
       },
+
+      async fetchBreedDogs({ commit }, breed) {
+        try {
+            commit('SET_LOADING', true)
+          const res = await api.get(`https://dog.ceo/api/breed/${breed}/images`);
+          const data = res.data.message;
+          commit('SET_SELECTED_BREED', data);
+          commit('SET_LOADING', false)
+        } catch (error) {
+          console.error(error);
+        }
+      }
   },
 });
 
