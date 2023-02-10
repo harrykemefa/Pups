@@ -18,7 +18,6 @@
               </router-link>
             </div>
             <div class="my-auto flex-shrink-0 py-16 sm:py-32">
-              <!-- <p class="text-base font-semibold text-indigo-600">{{ $store.state.pupInfo.image }}</p> -->
               <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">{{ $store.state.pupInfo.breed }} </h1>
               <p class="mt-2 text-base text-gray-500">This is a picture of a {{ $store.state.pupInfo.breed }} breed dog.</p>
               <div class="mt-6">
