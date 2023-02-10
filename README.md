@@ -1,4 +1,4 @@
-# Pups
+#  [Pups](https://pups-app.netlify.app/)
 
 Pups is a dog-loving app that makes it easy to find the perfect pup! With Pups, you can fetch a list of dogs from a trusted API and filter by breed. And once you've found the perfect pup, you can see all of their details, from breed information to fun facts. Whether you're a dog owner looking for a new companion or just a fan of these furry friends, Pups has everything you need to find your next furry BFF.
 ## List of Resources used for the app
