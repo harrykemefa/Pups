@@ -4,6 +4,7 @@
       <div class="py-6 sm:flex sm:items-baseline sm:justify-between">
         <h2 class="text-2xl font-bold tracking-tight text-gray-600"> Featured Pups</h2>
       </div>
+      <slot name="loader"></slot>
       <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
         <slot name="pup-items"></slot>
       </div>
