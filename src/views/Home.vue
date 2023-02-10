@@ -22,8 +22,8 @@ const state = reactive({
   pups: computed(() => store.state.all),
 });
 
-onMounted(() => {
-  store.dispatch('fetchPups')
+onMounted(async () => {
+  await store.dispatch('fetchPups')
 });
 
 </script>
