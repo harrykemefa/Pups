@@ -13,11 +13,7 @@
               <h1 class="truncate text-2xl font-bold text-gray-600">{{ profile.name }}</h1>
             </div>
             <div class="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-    <div class="relative mt-1 rounded-md shadow-sm">
-      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <CreditCardIcon class="h-6 w-6 text-blue-500"/>
-
-      </div>
+    <div class="relative mt-1 rounded-md shadow-sm border pr-3">
       <div>
  <slot name="select"></slot>
   </div>
@@ -35,9 +31,6 @@
   
   <script setup>
 import VLazyImage from "v-lazy-image";
-import { CreditCardIcon } from '@heroicons/vue/outline'
-
-  
   const profile = {
     name: 'PUPS+',
     avatar:

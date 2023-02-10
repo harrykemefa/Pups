@@ -11,31 +11,37 @@
   <APup>
     <template v-if="state.isLoading" #loader>  <ALoader  /></template>
     <template v-else #pup-items>
-      <APupItem  v-for="(pup, index) in state.pups" :key="index" :pup="pup" />
+      <APupItem  v-for="(pup, index) in state.pups" :key="index" :pup="pup"  @viewdetails="handleViewDetails" />
     </template>
   </APup>
   </main>
 </template>
 
 <script setup>
+// Components
 import AHeader from '@/components/AHeader/index.vue';
 import APup from '@/components/APup/index.vue';
 import APupItem from '@/components/APupItem/index.vue';
 import ALoader from '@/components/ALoader/index.vue';
-import { onMounted, reactive, computed } from 'vue'
+
+// Imports
+import { onMounted, reactive, computed, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex';
+
 const store = useStore();
-
-
+const router = useRouter();
+// State
 const state = reactive({
   pups: store.state.all,
   breeds: computed(() => store.state.breeds),
   isLoading: computed(() => store.state.loading),
-  selectedBreed: 'all'
+  selectedBreed: 'all',
+  isDataLoaded: store.state.isDataLoaded,
 });
 
-
-const handleBreedSelection = async (breed) => {
+// Filter Pups by Breed
+const handleBreedSelection = async () => {
   if (state.selectedBreed !== 'all') {
       await store.dispatch('fetchBreedDogs', state.selectedBreed);
       state.pups = store.state.selectedBreed;
@@ -44,9 +50,28 @@ const handleBreedSelection = async (breed) => {
       }
 }
 
-onMounted(async () => {
-  await store.dispatch('fetchPups');
-  store.dispatch('fetchBreeds')
+const handleViewDetails = (pup) => {
+  store.dispatch('fetchSinglePup', pup);
+  router.push(`/info/${store.state.pupInfo.breed}`);
+}
+
+// Fetch Pup Data
+const fetchPupData = async () => {
+  // Ensure fetching is done once
+  if(!state.isDataLoaded){
+    const [pups, breeds] = await Promise.all([
+    store.dispatch('fetchPups'),
+    store.dispatch('fetchBreeds')
+  ]);
+  }
+
+  handleBreedSelection()
+    
+}
+
+
+onMounted(() => {
+  fetchPupData();
 });
 
 </script>

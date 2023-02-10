@@ -11,7 +11,7 @@ const router = createRouter({
     },
 
     { 
-      path: '/info/:breed/:id',
+      path: '/info/:breed',
       name: 'Pups Info',
       component: () => import('@/views/Info.vue'),
     },
